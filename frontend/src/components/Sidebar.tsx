@@ -14,10 +14,10 @@ function Sidebar(){
         <Link to="/" className="block rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 text-slate-300 hover:bg-slate-700 hover:text-white">
           All Workouts
         </Link>
-        <Link to="/add-workout" className="block rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 text-slate-300 hover:bg-slate-700 hover:text-white">
+        <Link to="/add-workouts" className="block rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 text-slate-300 hover:bg-slate-700 hover:text-white">
           Add Workout
         </Link>
-        <Link to="/search-workout" className="block rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 text-slate-300 hover:bg-slate-700 hover:text-white">
+        <Link to="/search-workouts" className="block rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 text-slate-300 hover:bg-slate-700 hover:text-white">
           Search Workout
         </Link>
       </nav>
