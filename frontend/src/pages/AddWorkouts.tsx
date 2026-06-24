@@ -25,6 +25,23 @@ function AddWorkouts(){
             console.error('Error adding workout:', error);
         }
     };
+
+    const handleGenerateWorkout = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        try{
+            const response = await fetch('http://localhost:3000/workouts/generate-workout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ muscleGroup, name }),
+                })
+                const data = await response.json();
+            setDescription(data.description ?? '');
+        } catch (error) {
+            console.error('Error generating workout:', error);
+        }
+    };
     return(
         <div className="flex flex-col gap-6 text-white">
             <h1 className="text-2xl font-bold">Add Workout</h1>
@@ -70,6 +87,13 @@ function AddWorkouts(){
                     className="mt-2 rounded-lg bg-emerald-600 px-4 py-2.5 font-medium text-white transition hover:bg-emerald-500 active:scale-[0.98]"
                 >
                     Add Workout
+                </button>
+                <button
+                    type="button"
+                    className="mt-2 rounded-lg bg-emerald-600 px-4 py-2.5 font-medium text-white transition hover:bg-emerald-500 active:scale-[0.98]"
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleGenerateWorkout(e)}
+                >
+                    Generate Workout
                 </button>
             </form>
         </div>
