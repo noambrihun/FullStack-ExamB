@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Workout = require('../models/workouts');
+const {generateText} = require('ai');
+const {openai} = require('@ai-sdk/openai');
 
 router.get('/', async (req, res) => {
     try {
@@ -45,6 +47,19 @@ router.get('/:id', async(req,res) => {
         res.status(200).json({ message: 'Workout found successfully', workout });
     } catch (error) {
         res.status(400).json({ message: 'Error fetching workout', error: error.message });
+    }
+})
+
+router.post('/generate-workout', async(req,res) => {
+    const { muscleGroup } = req.body;
+    try{
+        const workout = await generateText({
+            model: openai('gpt-4o-mini'),
+            prompt: `Generate a workout for the muscle group: ${muscleGroup}`,
+        });
+        res.status(200).json({ message: 'Workout generated successfully', workout });
+    } catch (error) {
+        res.status(400).json({ message: 'Error generating workout', error: error.message });
     }
 })
 
