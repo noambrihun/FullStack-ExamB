@@ -18,11 +18,13 @@ function AllWorkouts(){
         setWorkouts(workouts.filter(workout => workout._id !== id));
     };
     return(
-        <div className="flex flex-col gap-4">
-            <h1>All Workouts</h1>
+        <div className="flex flex-col gap-6 text-white">
+            <h1 className="text-2xl font-bold">All Workouts</h1>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {workouts.map(workout => (
                 <WorkoutCard key={workout._id} workout={workout} onDelete={deleteWorkout} />
             ))}
+            </div>
         </div>
     )
 }
