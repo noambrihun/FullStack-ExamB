@@ -50,18 +50,20 @@ router.get('/:id', async(req,res) => {
     }
 })
 
-router.post('/generate-workout', async(req,res) => {
-    const { muscleGroup } = req.body;
-    try{
+router.post('/generate-workout', async (req, res) => {
+    const { muscleGroup, name } = req.body;
+    try {
         const workout = await generateText({
             model: openai('gpt-4o-mini'),
-            prompt: `Generate a workout for the muscle group: ${muscleGroup}`,
+            system: 'Write a short workout description in English. Maximum 20 words. No quotes, no bullet points.',
+            prompt: `Write a brief description for the "${name}" workout targeting the ${muscleGroup} muscle group.maximum 10 words.`,
+            maxOutputTokens: 60,
         });
-        res.status(200).json({ message: 'Workout generated successfully', workout });
+        res.json({ description: workout.text ?? '' });
     } catch (error) {
         res.status(400).json({ message: 'Error generating workout', error: error.message });
     }
-})
+});
 
 
 module.exports = router;
